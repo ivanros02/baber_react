@@ -58,15 +58,19 @@ router.post('/', async (req, res) => {
 // Actualizar el estado del turno
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { estado } = req.body;
+    const { estado, cliente_fecha, cliente_hora } = req.body;
+    
     try {
-        await pool.query('UPDATE turnos SET estado = ? WHERE id = ?', [estado, id]);
+        await pool.query('UPDATE turnos SET estado = ?, fecha = ?, hora = ? WHERE id = ?', 
+            [estado, cliente_fecha, cliente_hora, id]
+        );
         res.json({ message: 'Turno actualizado exitosamente' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al actualizar el turno' });
     }
 });
+
 
 // Eliminar un turno
 router.delete('/:id', async (req, res) => {

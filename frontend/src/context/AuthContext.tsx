@@ -13,7 +13,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [token]);
 
-    const login = (newToken: string) => setToken(newToken);
+    const login = async (username: string, password: string): Promise<boolean> => {
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                return false; // Si la respuesta no es exitosa, retornamos falso
+            }
+
+            const data = await response.json();
+            setToken(data.token); // Guardamos el token si es correcto
+            return true;
+        } catch (error) {
+            
+            return false;
+        }
+    };
+
     const logout = () => setToken(null);
 
     return (

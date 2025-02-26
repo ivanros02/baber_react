@@ -1,0 +1,33 @@
+.calendar-container {
+    background-color: #F2EDDC;
+    color: #0D0A08;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.title {
+    color: #261D01;
+}
+
+.create-button {
+    background-color: #8C742B;
+    border: none;
+    color: #F2EDDC;
+}
+
+.create-button:hover {
+    background-color: #594F31;
+}
+
+.select-barbero {
+    background-color: #F2EDDC;
+    color: #261D01;
+    border: 2px solid #594F31;
+    border-radius: 5px;
+}
+
+.calendar {
+    border: 2px solid #594F31;
+    border-radius: 10px;
+    padding: 10px;
+}

@@ -14,4 +14,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Crear un nuevo Barbero
+router.post('/', async (req, res) => {
+    const { barbero_nombre, barber_telefono } = req.body;
+
+    if (!barbero_nombre) {
+        return res.status(400).json({ message: 'El nombre del barbero es requerido' });
+    }
+
+    try {
+        await pool.query(
+            'INSERT INTO barberos (nombre, telefono) VALUES (?, ?)',
+            [barbero_nombre,barber_telefono]
+        );
+        res.status(201).json({ message: 'Barbero creado exitosamente' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al crear el Barbero' });
+    }
+});
+
 module.exports = router;
